@@ -13,6 +13,7 @@ public class CoinCollect : MonoBehaviour
         coinCount = GameObject.FindGameObjectsWithTag("Coin").Length;
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/sequence_time", time);
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/victory_music", 0);
+        OSCHandler.Instance.SendMessageToClient("pd", "/unity/victory_music_vol", 0);
         Debug.Log("Total coins in level: " + coinCount.ToString());
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,6 +31,7 @@ public class CoinCollect : MonoBehaviour
         if (coinCount == 0)
         {
             OSCHandler.Instance.SendMessageToClient("pd", "/unity/victory_music", 1);//call the function and turn on music audio
+            OSCHandler.Instance.SendMessageToClient("pd", "/unity/victory_music_vol", 0.5f);//call the function and turn on music audio
             OSCHandler.Instance.SendMessageToClient("pd", "/unity/sequence_vol", 0);
         }
     }
